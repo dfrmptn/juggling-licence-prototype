@@ -3,6 +3,7 @@ const router = express.Router()
 
 // Add your routes here - above the module.exports line
 
+// Juggling balls error handling
 router.post('/juggling-balls-answer', function (req, res) {
 
   // Make a variable and give it the value from 'juggling-balls'
@@ -21,8 +22,20 @@ router.post('/juggling-balls-answer', function (req, res) {
   }
 })
 
+// Juggling trick error handling
 router.post('/juggling-trick-answer', function (req, res) {
   var jugglingTrick = req.session.data['juggling-trick']
+
+  if (jugglingTrick == "") {
+    res.redirect('/juggling-trick-error')
+  } else {
+    res.redirect('/juggling-start-date')
+  }
+})
+
+/*
+router.post('/juggling-start-date-answer', function (req, res) {
+  var jugglingStartDate = req.session.data['juggling-trick']
 
   if (jugglingTrick == "") {
     res.redirect('/juggling-trick-error')
@@ -30,5 +43,6 @@ router.post('/juggling-trick-answer', function (req, res) {
     res.redirect('/check-your-answers')
   }
 })
+*/
 
 module.exports = router
